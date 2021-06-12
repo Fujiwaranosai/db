@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 import { BaseEntity } from './base.entity';
@@ -6,17 +7,21 @@ import { ColorEntity } from './color.entity';
 
 @Entity({ name: 'product' })
 export class ProductEntity extends BaseEntity {
+  @ApiProperty()
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ApiProperty()
   @Column({ nullable: false })
   name: string;
 
-  @Column({ nullable: false })
+  @ApiProperty()
+  @Column({ name: 'branch_id', nullable: false })
   branchId: number;
 
-  @JoinColumn({ name: 'branchId' })
-  @ManyToOne((type) => BranchEntity, (branch) => branch.products, {
+  @ApiProperty()
+  @JoinColumn({ name: 'branch_id' })
+  @ManyToOne(() => BranchEntity, (branch) => branch.products, {
     cascade: true,
     nullable: false,
     onDelete: 'CASCADE',
@@ -24,11 +29,13 @@ export class ProductEntity extends BaseEntity {
   })
   branch: BranchEntity;
 
-  @Column({ nullable: false })
+  @ApiProperty()
+  @Column({ name: 'color_id', nullable: false })
   colorId: number;
 
-  @JoinColumn({ name: 'colorId' })
-  @ManyToOne((type) => ColorEntity, (color) => color.products, {
+  @ApiProperty()
+  @JoinColumn({ name: 'color_id' })
+  @ManyToOne(() => ColorEntity, (color) => color.products, {
     cascade: true,
     nullable: false,
     onDelete: 'CASCADE',
