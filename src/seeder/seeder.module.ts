@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { DatabaseService } from '../database/database.service';
 import { BranchEntity } from '../entities/branch.entity';
 import { ColorEntity } from '../entities/color.entity';
 import { ProductEntity } from '../entities/product.entity';
@@ -30,6 +31,6 @@ import { ProductSeederService } from './product-seeder.service';
     }),
     TypeOrmModule.forFeature([ProductEntity, BranchEntity, ColorEntity]),
   ],
-  providers: [BranchSeederService, ColorSeederService, ProductSeederService],
+  providers: [BranchSeederService, ColorSeederService, ProductSeederService, DatabaseService],
 })
 export class SeederModule {}

@@ -11,8 +11,13 @@ async function bootstrap() {
   const branchSeeder = context.get(BranchSeederService);
   const colorSeeder = context.get(ColorSeederService);
 
+  console.log('seeding branches');
   const branches = await branchSeeder.seed(3);
+
+  console.log('seeding colors');
   const colors = await colorSeeder.seed(5);
+
+  console.log('seeding products');
   await productSeeder.seed(branches, colors, 10);
 }
 bootstrap().then(() => console.log('done bootstrap'));

@@ -10,6 +10,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
+    "clear": "ts-node -r tsconfig-paths/register src/clear.ts",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "husky": "husky install && husky set .husky/pre-commit \"npm run precommit\"",
     "precommit": "lint-staged",
